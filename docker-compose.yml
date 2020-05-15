@@ -1,23 +1,23 @@
 version: '3.7'
 
 services:
-    sqlserver:
-        image: mcr.microsoft.com/mssql/server
-        container_name: sqlserver
-        environment:
-            - ACCEPT_EULA=Y
-            - SA_PASSWORD=*4072300Dev
-        ports:
-            - "1433:1433"
-        volumes:
-            - C:\Users\stief\DockerVolumes\sqlserver:/var/opt/mssql/data
-
-    # node:
-    #     container_name: node
-    #     build: .
-    #     user: node
-    #     ports: 
-    #         - "3000:3000"
-    #     volumes: 
-    #         - ".:/usr/src/twa"
-    #     command: "npm run dev"
+    # sqlserver:
+    #     image: mcr.microsoft.com/mssql/server
+    #     container_name: sqlserver
+    #     environment:
+    #         - ACCEPT_EULA=Y
+    #         - SA_PASSWORD=*4072300Dev
+    #     ports:
+    #         - "1433:1433"
+    #     volumes:
+    #         - C:\Users\stief\DockerVolumes\sqlserver:/var/opt/mssql/data
+    node:
+        container_name: node
+        build: .
+        user: node
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - ".:/usr/src/twa"
+            - "/usr/src/twa/node_modules"
+        command: "npm run dev"
