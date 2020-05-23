@@ -1,9 +1,15 @@
-FROM node:12.16.3
+FROM mcr.microsoft.com/mssql/server
 
-WORKDIR /usr/src/twa
+WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package*.json .
 
-RUN npm ci
+RUN npm install
+
+EXPOSE 1433
+
+ENV ACCEPT_EULA=Y SA_PASSWORD=*4072300Dev
+
+CMD [ "npm", "start" ]
 
 COPY . .
