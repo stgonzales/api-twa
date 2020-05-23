@@ -1,16 +1,16 @@
 version: '3.7'
 
 services:
-    # sqlserver:
-    #     image: mcr.microsoft.com/mssql/server
-    #     container_name: sqlserver
-    #     environment:
-    #         - ACCEPT_EULA=Y
-    #         - SA_PASSWORD=*4072300Dev
-    #     ports:
-    #         - "1433:1433"
-    #     volumes:
-    #         - C:\Users\stief\DockerVolumes\sqlserver:/var/opt/mssql/data
+    sqlserver:
+        image: mcr.microsoft.com/mssql/server
+        container_name: sqlserver
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=*4072300Dev
+        ports:
+            - "1433:1433"
+        volumes:
+            - C:\Users\stief\DockerVolumes\sqlserver:/var/opt/mssql/data
     node:
         container_name: node
         build: .

@@ -1,39 +1,45 @@
-const User = require('../models/User')
+const User = require('../models/User');
 
 module.exports = {
     async index(req, res){
         
-        setTimeout( async function(){ 
-            const users = await User.findAll()
-            return res.json(users);
-        }, 1000);
-        
-        //const users = await User.findAll()
-
-        
+        const users = await User.findAll()
+        return res.status(200).json(users);
     },
     
     async store(req, res){
-        const {name, email} = req.body;
+        const {name, email, admin, active} = req.body;
 
-        const user = await User.create({name, email})
+        const rows = await User.findOne({ where: { email: email } })
 
-        return res.json(user);
+        if(rows) return res.json({message:`Email '${email}' already exist, contact the admin for update password!`})
+        
+        await User.create({name, email, admin, active})
+            .then(user => {
+                return res.status(201).json(user);
+            })
+            .catch(err => {
+                return res.status(400).json({message:`Error. ${err}`})
+            })
     },
 
     async update(req, res){
-        const {id, name, email} = req.body
+        const {id, name, email, admin, active} = req.body
 
         await User.update({
             name,
-            email
+            email,
+            admin,
+            active
         },
         {
             where: {id}
         })
-            .then( count => {
-                console.log(`Rows updated ${count}`)
-                return res.status(200).json({message:`Updated successfully, Rows updated ${count}`})
+            .then( rows => {
+
+                if(rows < 1) return res.json({message:`User id not found. ${rows} updated.`})
+                
+                return res.status(201).json({message:`Updated successfully, Rows updated ${rows}`})
             })
             .catch(err => {return res.status(500).json({message: `Internal server error (SQL Server API): ${err}`})})
     },
@@ -45,15 +51,15 @@ module.exports = {
                 id: req.params.id
             }
         })
-        .then(function(rowDeleted){
-            if(rowDeleted === 1){
-                return res.status(200).json({message:"Deleted successfully"})
-            }else{
-                return res.status(404).json({message:"record not found"})
-            }
+        .then(function(rows){
+
+            if(rows < 1) return res.status(400).json({message:`User id not found. ${rows} deleted.`})
+            
+            return res.status(200).json({message:"Deleted successfully"})
+
         })
         .catch(function(err) {
-            return res.status(500).json(error)
+            return res.status(500).json({message: `Internal server error (SQL Server API): ${err}`})
         })
     }
 }
