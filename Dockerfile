@@ -1,15 +1,17 @@
-FROM mcr.microsoft.com/mssql/server
+FROM node:12.16.3-alpine
 
-WORKDIR /usr/src/app
+RUN apt-get -y update  && \
+        apt-get install -y curl && \
+        curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+        apt-get install -y nodejs
+
+RUN mkdir -p /usr/src/api
+WORKDIR /usr/src/api
+
+EXPOSE 3000
 
 COPY package*.json .
 
 RUN npm install
-
-EXPOSE 1433
-
-ENV ACCEPT_EULA=Y SA_PASSWORD=*4072300Dev
-
-CMD [ "npm", "start" ]
 
 COPY . .
