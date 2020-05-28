@@ -7,10 +7,8 @@ services:
         environment:
             - ACCEPT_EULA=Y
             - SA_PASSWORD=*4072300Dev
-        volumes:
-            - /var/opt/mssql/data
         networks: 
-            - "docker-network"
+            - "dockertnet"
 
     api:
         build: .
@@ -21,16 +19,16 @@ services:
             - ".:/usr/src/api"
             - "/usr/src/api/node_modules"
         networks: 
-            - "docker-network"
+            - "dockertnet"
         depends_on: 
             - database
         environment:
             - DIALECT=mssql
-            - DB_HOST=localhost
+            - DB_HOST=database
             - DB_USER=sa
             - DB_PASSWORD=*4072300Dev
             - DATABASE=TWA_Dev
         
     networks: 
-        docker-network:
+        dockertnet:
             driver: bridge
