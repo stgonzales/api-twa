@@ -1,0 +1,9 @@
+CREATE USER stgonzales 
+    WITH SUPERUSER 
+    PASSWORD '*4072300Dev';
+
+CREATE DATABASE "TWA_Dev"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;

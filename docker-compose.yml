@@ -2,13 +2,15 @@ version: '3.7'
 
 services:
     database:
-        image: mcr.microsoft.com/mssql/server
-        container_name: mssql
+        image: postgres
+        container_name: postgres
+        restart: always
         environment:
-            - ACCEPT_EULA=Y
-            - SA_PASSWORD=*4072300Dev
-        volumes: 
-            - C:\Users\stief\DockerVolumes\sqlserver:/var/opt/mssql/data
+            - POSTGRES_PASSWORD=*4072300Dev
+        ports: 
+            - "5432:5432"
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
         networks: 
             - "dockertnet"
 
@@ -25,11 +27,12 @@ services:
         depends_on: 
             - database
         environment:
-            - DIALECT=mssql
+            - DIALECT=postgres
             - DB_HOST=database
-            - DB_USER=sa
+            - DB_USER=stgonzales
             - DB_PASSWORD=*4072300Dev
-            - DATABASE=TWA_Dev        
+            - DATABASE=TWA_Dev
+            - PORT=3000       
 networks: 
     dockertnet:
         driver: bridge
