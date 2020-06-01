@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false
       },
       document_number:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       default_phone:{

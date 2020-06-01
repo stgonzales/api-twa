@@ -1,11 +1,11 @@
-const Customers = require('../models/Customers');
+const Customers = require('../models/Customer.js');
 
 module.exports = {
     async index(req, res){
-        
+                
         const customers = await Customers.findAll()
-        if(!customers) return res.status(200).json({message:`No Customer Record!`});
         return res.status(200).json(customers)
+
     },
     
     async store(req, res){
@@ -13,7 +13,7 @@ module.exports = {
 
         const rows = await Customers.findOne({ where: { document_number: document_number } })
 
-        if(rows) return res.json({message:`Customer already exist!`})
+        if(rows) return res.json({message:`Customers already exist!`})
         
         await Customers.create({name, document_number, default_phone, default_email, priority_group_id})
             .then(customer => {
@@ -24,26 +24,27 @@ module.exports = {
             })
     },
 
-    // async update(req, res){
-    //     const {id, name, email, admin, active} = req.body
+    async update(req, res){
+        const {id, name, document_number, default_phone, default_email, priority_group_id} = req.body;
 
-    //     await User.update({
-    //         name,
-    //         email,
-    //         admin,
-    //         active
-    //     },
-    //     {
-    //         where: {id}
-    //     })
-    //         .then( rows => {
+        await Customers.update({
+            name,
+            document_number,
+            default_phone,
+            default_email,
+            priority_group_id
+        },
+        {
+            where: {id}
+        })
+            .then( rows => {
 
-    //             if(rows < 1) return res.json({message:`User id not found. ${rows} updated.`})
+                if(rows < 1) return res.json({message:`Customer id not found. ${rows} updated.`})
                 
-    //             return res.status(201).json({message:`Updated successfully, Rows updated ${rows}`})
-    //         })
-    //         .catch(err => {return res.status(500).json({message: `Internal server error (SQL Server API): ${err}`})})
-    // },
+                return res.status(201).json({message:`Updated successfully, Rows updated ${rows}`})
+            })
+            .catch(err => {return res.status(500).json({message: `Internal server error (SQL Server API): ${err}`})})
+    },
 
     // async exclude(req, res){
                 

@@ -4,6 +4,8 @@ CREATE USER stgonzales
 
 CREATE DATABASE "TWA_Dev"
     WITH 
-    OWNER = postgres
+    OWNER = stgonzales
     ENCODING = 'UTF8'
     CONNECTION LIMIT = -1;
+
+    
