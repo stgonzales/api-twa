@@ -1,6 +1,6 @@
 const express = require('express')
 const UserController = require('./controllers/UserController')
-const CustomersController = require('./controllers/CustomersController')
+const CustomersController = require('./controllers/CustomerController')
 
 const routes = express.Router()
 
@@ -17,7 +17,7 @@ routes.get('/customers', CustomersController.index)
 
 routes.post('/new-customer', CustomersController.store)
 
-routes.put('/updt-customer', CustomersController.update)
+//routes.put('/updt-customer', CustomersController.update)
 
 
 //TO-DO

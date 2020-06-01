@@ -4,7 +4,8 @@ module.exports = {
     async index(req, res){
         
         const customers = await Customers.findAll()
-        return res.status(200).json(customers);
+        if(!customers) return res.status(200).json({message:`No Customer Record!`});
+        return res.status(200).json(customers)
     },
     
     async store(req, res){
