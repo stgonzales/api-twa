@@ -2,37 +2,32 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    
-    return queryInterface.createTable('tickets', { 
+    return queryInterface.createTable('customers', { 
       id:{
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      customer_id:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      user_id:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      status_id:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      contact_id:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      issue_description:{
+      name:{
         type: Sequelize.STRING,
         allowNull: false
       },
-      conclusion_description:{
+      document_number:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      default_phone:{
         type: Sequelize.STRING,
         allowNull: true
+      },
+      default_email:{
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      priority_group_id:{
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       created_at: {
         type: Sequelize.DATE,
@@ -42,15 +37,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      ended_at:{
-        type: Sequelize.DATE,
-        allowNull: true
-      }
     });
-
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('tickets');
+    
+    return queryInterface.dropTable('customers');
   }
 };

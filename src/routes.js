@@ -1,5 +1,6 @@
 const express = require('express')
 const UserController = require('./controllers/UserController')
+const CustomersController = require('./controllers/CustomersController')
 
 const routes = express.Router()
 
@@ -10,9 +11,15 @@ routes.post('/new-user', UserController.store)
 
 routes.put('/updt-user', UserController.update)
 
-routes.delete('/delete-user/:id', UserController.exclude)
 
-//TICKET-ROUTES
+//CUSTOMER-ROUTES
+routes.get('/customers', CustomersController.index)
+
+routes.post('/new-customer', CustomersController.store)
+
+routes.put('/updt-customer', CustomersController.update)
+
+
 //TO-DO
 
 module.exports = routes;
