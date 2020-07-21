@@ -4,7 +4,7 @@ services:
 
     nginx:
         image: nginx
-        container_name: reverse_proxy
+        container_name: nginx
         depends_on: 
             - database
             - api
