@@ -12,6 +12,8 @@ services:
             - ./nginx.conf:/etc/nginx/nginx.conf
         ports: 
             - 80:80
+        networks: 
+            - "dockertnet"
 
     database:
         image: postgres
@@ -24,6 +26,8 @@ services:
         volumes:
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
         restart: on-failure
+        networks: 
+            - "dockertnet"
 
     api:
         build: .
@@ -43,3 +47,9 @@ services:
             - DATABASE=TWA_Dev
             - PORT=3000
         restart: on-failure
+        networks: 
+            - "dockertnet"
+    
+networks: 
+    dockertnet:
+        driver: bridge
