@@ -17,8 +17,6 @@ services:
             - /docker-volumes/etc/letsencrypt/live/iamgonzales.dev/fullchain.pem
             - /docker-volumes/etc/letsencrypt/live/iamgonzales.dev/privkey.pem
         restart: unless-stopped
-        networks: 
-            - "docker-net"
 
     database:
         image: postgres
