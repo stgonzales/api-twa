@@ -55,6 +55,6 @@ services:
         networks: 
             - "docker-net"
     
-    networks: 
-        docker-net:
-            driver: bridge 
+networks: 
+    docker-net:
+        driver: bridge 
