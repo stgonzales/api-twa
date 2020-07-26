@@ -48,7 +48,7 @@ services:
             - DIALECT=postgres
             - DB_HOST=database
             - DB_USER=stgonzales
-            - DB_PASSWORD=*4072300Dev
+            - DB_PASSWORD=12345Dev
             - DATABASE=TWA_Dev
             - PORT=3000
         restart: unless-stopped
