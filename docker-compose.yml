@@ -4,8 +4,7 @@ services:
 
     nginx:
         container_name: nginx
-        image: nginx:latest
-        command: apt update && apt install inetutils-ping wget -y
+        build: ./Dockerfiles/nginx
         ports: 
             - 80:80
             - 443:443
@@ -36,7 +35,7 @@ services:
             - "docker-net"
 
     api:
-        build: .
+        build: ./Dockerfiles/api
         container_name: api
         ports: 
             - "3000:3000"
