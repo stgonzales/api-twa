@@ -5,6 +5,7 @@ services:
     nginx:
         container_name: nginx
         image: nginx:latest
+        command: apt update && apt install inetutils-ping wget -y
         ports: 
             - 80:80
             - 443:443
